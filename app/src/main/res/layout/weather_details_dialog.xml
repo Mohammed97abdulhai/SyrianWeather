@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/main_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:text="درجة الحرارة"
+        android:textColor="@color/mainActivityTextColor"/>
+
+    <TextView
+        android:id="@+id/main_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/main_text"
+        android:textColor="@color/mainActivityTextColor"
+        android:textSize="16sp"/>
+
+
+    <ImageView
+        android:id="@+id/weather_stats"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/main_temp"
+        android:layout_marginTop="20dp"/>
+
+
+    <TextView
+        android:id="@+id/humidity_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weather_stats"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:text="الرطوبة"
+        android:textSize="20sp"
+        android:textColor="@color/mainActivityTextColor"/>
+
+    <TextView
+        android:id="@+id/humidity_in_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/humidity_text"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:textColor="@color/mainActivityTextColor"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/wind_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weather_stats"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="سرعة الرياح"
+        android:textSize="20sp"
+        android:textColor="@color/mainActivityTextColor"/>
+
+    <TextView
+        android:id="@+id/wind_speed_in_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/wind_text"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/mainActivityTextColor"/>
+
+
+</RelativeLayout>

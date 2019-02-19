@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Weather APP</string>
+    <string name="enter_city_name"> Enter city name</string>
+    <string name="get_weather"> Get Weather</string>
+    <string name="get_forecast"> Get FUll Forecast</string>
+    
+    <string name="humidity"> الرطوبة</string>
+    <string name="wind"> سرعة الرياح واتجاهها</string>
+
+    <string-array name="governorates">
+        <item> دمشق</item>
+        <item>ريف دمشق </item>
+        <item> حلب</item>
+        <item> ادلب </item>
+        <item> حماة</item>
+        <item> حمص</item>
+        <item> السويداء </item>
+        <item>الررقة</item>
+        <item> الفنيطرة</item>
+        <item> اللاذقية</item>
+        <item>طرطوس</item>
+        <item>الحسكة</item>
+        <item>دير الزور</item>
+        <item>درعا</item>
+    </string-array>
+</resources>
