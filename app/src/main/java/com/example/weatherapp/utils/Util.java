@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Util {
 
-    static List<String> temp = Arrays.asList("sunday","Monday","Tuesday","Wednesday","Thursday","Friday","saturday");
+    static List<String> temp = Arrays.asList("الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت");
     static ArrayList<String> days = new ArrayList<>(temp);
 
 
@@ -35,7 +35,7 @@ public class Util {
     {
 
         ArrayList<String>  week = new ArrayList<>();
-        week.add("today");
+        week.add("اليوم");
 
         Date now = new Date();
         Calendar c = Calendar.getInstance();

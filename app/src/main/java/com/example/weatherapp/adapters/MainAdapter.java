@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
 import android.support.v7.widget.RecyclerView;
@@ -79,6 +80,8 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
         childlayout.setInitialPrefetchItemCount(4);
         ((Item) viewHolder).recyclerView.setLayoutManager(childlayout);
         ((Item) viewHolder).recyclerView.setRecycledViewPool(viewPool);
+
+        ((Item) viewHolder).recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL));
 
 
 

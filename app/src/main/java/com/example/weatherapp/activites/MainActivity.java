@@ -6,8 +6,10 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Build;
 import android.os.SystemClock;
@@ -59,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     ProgressDialog progressDoalog;
 
-
     //a string variable to save the chosen city name
     String city;
 
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         ArrayAdapter<CharSequence> governeratesAdapter = ArrayAdapter.createFromResource(this, R.array.governorates,
-                android.R.layout.simple_spinner_item);
+                R.layout.spinner_item);
         governeratesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cityName.setAdapter(governeratesAdapter);
         cityName.setOnItemSelectedListener(this);
@@ -154,8 +155,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private Notification getNotification(String content) {
-
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             int importance = NotificationManager.IMPORTANCE_LOW;
@@ -173,16 +172,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Notification.Builder builder = new Notification.Builder(this);
             builder.setContentTitle("حالة الطقس اليومية");
             builder.setContentText(content);
-            builder.setSmallIcon(R.drawable.ic_launcher_background);
+            builder.setSmallIcon(R.mipmap.ic_launcher_round);
             builder.setChannelId(Channel_ID);
 
             return builder.build();
 
         }
+
+        Intent activityIntent = new Intent(this, MainActivity.class);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntentWithParentStack(activityIntent);
+
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle("حالة الطقس اليومية");
         builder.setContentText(content);
-        builder.setSmallIcon(R.drawable.ic_launcher_background);
+        builder.setContentIntent(resultPendingIntent);
+        builder.setSmallIcon(R.mipmap.app_icon);
 
         return builder.build();
     }
@@ -307,8 +316,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
                 wind.setVisibility(View.VISIBLE);
-                windDetails.setText(String.valueOf(response.body().getWind().getSpeed()) + " m/h , " +
-                        String.valueOf(response.body().getWind().getDeg()));
+                windDetails.setText(String.valueOf(response.body().getWind().getSpeed()) + " m/h");
                 windDetails.setVisibility(View.VISIBLE);
 
                 windIcon.setVisibility(View.VISIBLE);
