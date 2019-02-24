@@ -3,9 +3,13 @@
     <string name="enter_city_name"> Enter city name</string>
     <string name="get_weather"> Get Weather</string>
     <string name="get_forecast"> Get FUll Forecast</string>
-    
+    <string name="channel_name"> channel</string>
+    <string name="channel_description"> channel description</string>
+
+    <string name="temp"> الحرارة</string>
     <string name="humidity"> الرطوبة</string>
-    <string name="wind"> سرعة الرياح واتجاهها</string>
+    <string name="wind"> سرعة الرياح</string>
+
 
     <string-array name="governorates">
         <item> دمشق</item>
@@ -23,4 +27,6 @@
         <item>دير الزور</item>
         <item>درعا</item>
     </string-array>
+
+
 </resources>

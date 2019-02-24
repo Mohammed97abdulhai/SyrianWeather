@@ -2,11 +2,14 @@ package com.example.weatherapp.activites;
 
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -63,14 +66,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //a long variable to save the id of the chosen city
     long cityID;
 
+    static String [] conditionsEnglish = {"light rain","moderate rain","heavy intensity rain","very heavy rain","extreme rain","freezing rain","shower rain","clear sky","few clouds","scattered clouds","broken clouds","overcast clouds"};
+    static String [] conditionsArabic = {"مطر خفيف","ماطر معتدل","ماطر بكثافة","ماطر بكثافة عالية ","ماطر بغزارة عالية جدا","ماطر متجمد","مطر مع برق","سماء صافية","غيوم قليلة","غيوم مبعثرة","غائم جزئيا","غائم كليا"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        /*Intent notifyIntent = new Intent(this,MyReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast
+                (this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
+                1000 * 60, pendingIntent);*/
+
 
         init_views();
 
@@ -126,24 +137,53 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+    public static  String Channel_ID = "id";
+
     private void scheduleNotification(Notification notification, int delay) {
+
+
 
         Intent notificationIntent = new Intent(this, MyReceiver.class);
         notificationIntent.putExtra(MyReceiver.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(MyReceiver.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        long futureInMillis = SystemClock.elapsedRealtime() + delay;
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, futureInMillis, futureInMillis, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * delay, pendingIntent);
     }
 
     private Notification getNotification(String content) {
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+
+            NotificationChannel channel = new NotificationChannel(Channel_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+
+            Notification.Builder builder = new Notification.Builder(this);
+            builder.setContentTitle("حالة الطقس اليومية");
+            builder.setContentText(content);
+            builder.setSmallIcon(R.drawable.ic_launcher_background);
+            builder.setChannelId(Channel_ID);
+
+            return builder.build();
+
+        }
         Notification.Builder builder = new Notification.Builder(this);
-        builder.setContentTitle("Scheduled Notification");
+        builder.setContentTitle("حالة الطقس اليومية");
         builder.setContentText(content);
         builder.setSmallIcon(R.drawable.ic_launcher_background);
+
         return builder.build();
     }
 
@@ -254,7 +294,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Picasso.with(getApplicationContext()).load("http://openweathermap.org/img/w/" + info.get(0).getIcon() + ".png").into(weatherIcon);
                 weatherIcon.setVisibility(View.VISIBLE);
 
-                weatherDescription.setText(info.get(0).getDescription());
+
+                for(int index=0;index<conditionsEnglish.length; index++)
+                {
+                    if(conditionsEnglish[index].equalsIgnoreCase(response.body().getWeather().get(0).getDescription()))
+                    {
+
+                        weatherDescription.setText(conditionsArabic[index]);
+                    }
+                }
                 weatherDescription.setVisibility(View.VISIBLE);
 
 
@@ -272,7 +320,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 humidityIcon.setVisibility(View.VISIBLE);
 
                 getForecasat.setVisibility(View.VISIBLE);
-                scheduleNotification(getNotification(String.valueOf(response.body().getDetailedWeather().getTemp())), 5000);
+
+                String notficationContent = "temparature: " + Util.kelvintoCelisuis((response.body().getDetailedWeather().getTemp())) + ", condition: " + response.body().getWeather().get(0).getDescription();
+                scheduleNotification(getNotification(notficationContent), 60*60);
 
 
             }
@@ -289,6 +339,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    private void createNotificationChannel() {
+        String CHANNEL_ID = "id";
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }

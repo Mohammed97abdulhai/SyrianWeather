@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Util {
 
-    static List<String> temp = Arrays.asList("saturday","saunday","Monday","Tuesday","Wednesday","Thursday","Friday");
+    static List<String> temp = Arrays.asList("sunday","Monday","Tuesday","Wednesday","Thursday","Friday","saturday");
     static ArrayList<String> days = new ArrayList<>(temp);
 
 
@@ -25,16 +25,22 @@ public class Util {
         return temprature;
     }
 
+    static int dayofweek(int d, int m, int y)
+    {
+        int t[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
+        y -= (m < 3) ? 1 : 0;
+        return ( y + y/4 - y/100 + y/400 + t[m-1] + d) % 7;
+    }
     static public ArrayList<String> intiDays()
     {
 
         ArrayList<String>  week = new ArrayList<>();
         week.add("today");
-        Date now = new Date();
 
+        Date now = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(now);
-        int day = c.get(Calendar.DAY_OF_WEEK)+1;
+        int day = c.get(Calendar.DAY_OF_WEEK);
         for(int i =0 ; i<4; i++)
         {
             if(day == 7)

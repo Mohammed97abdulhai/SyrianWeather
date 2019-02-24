@@ -5,8 +5,9 @@
     <color name="colorAccent">#03DAC6</color>
     <color name="WeatherButtonColor"> #6666ff</color>
     <color name="WeatherButtonTextColor">#FFFFFF</color>
-    <color name="mainActivityTextColor">#000000</color>
+    <color name="mainActivityTextColor">#FFF</color>
     <color name="filterPrimary">#0073e6</color>
     <color name="filterPrimaryDark">#004080</color>
     <color name="toolbarBackground">#0073e6</color>
+    <color name="mainActivityViews"></color>
 </resources>

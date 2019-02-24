@@ -19,7 +19,7 @@ public class MyNewIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-       /* Notification.Builder builder = new Notification.Builder(this);
+        Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle("My Title");
         builder.setContentText("This is the Body");
         builder.setSmallIcon(R.drawable.ic_launcher_background);
@@ -29,6 +29,6 @@ public class MyNewIntentService extends IntentService {
         builder.setContentIntent(pendingIntent);
         Notification notificationCompat = builder.build();
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
-        managerCompat.notify(NOTIFICATION_ID, notificationCompat);*/
+        managerCompat.notify(NOTIFICATION_ID, notificationCompat);
     }
 }
