@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         ArrayAdapter<CharSequence> governeratesAdapter = ArrayAdapter.createFromResource(this, R.array.governorates,
-                R.layout.spinner_item);
-        governeratesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_simple_item_my);
+        governeratesAdapter.setDropDownViewResource(R.layout.spinner_item);
         cityName.setAdapter(governeratesAdapter);
         cityName.setOnItemSelectedListener(this);
 
@@ -168,6 +168,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Notification getNotification(String content) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
+
+            Intent activityIntent = new Intent(this, MainActivity.class);
+
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+            stackBuilder.addNextIntentWithParentStack(activityIntent);
+
+            PendingIntent resultPendingIntent =
+                    stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
             int importance = NotificationManager.IMPORTANCE_LOW;
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
@@ -183,7 +193,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Notification.Builder builder = new Notification.Builder(this);
             builder.setContentTitle("حالة الطقس اليومية");
             builder.setContentText(content);
-            builder.setSmallIcon(R.mipmap.ic_launcher_round);
+            builder.setContentIntent(resultPendingIntent);
+            builder.setSmallIcon(R.mipmap.app_icon);
             builder.setChannelId(Channel_ID);
 
             return builder.build();

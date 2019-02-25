@@ -10,6 +10,7 @@
     <string name="humidity"> الرطوبة</string>
     <string name="wind"> سرعة الرياح</string>
 
+    <string name="spinner_title"> اختر المحافظة</string>
 
     <string-array name="governorates">
         <item> دمشق</item>

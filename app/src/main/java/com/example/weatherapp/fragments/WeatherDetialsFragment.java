@@ -3,6 +3,7 @@ package com.example.weatherapp.fragments;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.models.ParentModel;
+import com.google.android.gms.common.ErrorDialogFragment;
 import com.squareup.picasso.Picasso;
 
 public class WeatherDetialsFragment extends DialogFragment {
@@ -45,6 +47,14 @@ public class WeatherDetialsFragment extends DialogFragment {
         humidity.setText(String.valueOf(model.getHummidity()) + " %");
         windSpeed.setText(String.valueOf(model.getWindspeed()) + " m/s");
 
+
+        v.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
+            }
+        });
         return v;
     }
 }

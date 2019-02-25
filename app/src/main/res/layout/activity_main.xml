@@ -35,7 +35,9 @@
                     android:layout_below="@id/logo"
                     android:layout_centerHorizontal="true"
                     android:paddingRight="10dp"
-                    android:textAlignment="center"
+                    android:prompt="@string/spinner_title"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/custom_edit_text" />
 
