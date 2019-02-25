@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg"
     tools:context=".activites.ForecastActivity">
 
@@ -26,10 +25,25 @@
 
     </android.support.v7.widget.Toolbar>
 
+
+
+    <ProgressBar
+        android:id="@+id/progressbar_forecast"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        android:max="100"
+        android:layout_below="@+id/weather_description"
+        android:layout_marginTop="-7dp"/>
+
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/days_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
         android:orientation="vertical"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
-</LinearLayout>
+</RelativeLayout>

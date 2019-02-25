@@ -17,10 +17,12 @@
 
 
 
+
+
                 <ImageView
                     android:id="@+id/logo"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/logo"/>
@@ -63,6 +65,17 @@
 
 
 
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:indeterminate="true"
+                    android:max="100" />
+
+
                 <LinearLayout
                     android:id="@+id/details_layout"
                     android:layout_width="match_parent"
@@ -80,7 +93,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/layout_background_wind">
+                        android:background="@drawable/layout_background_wind"
+                        android:visibility="invisible">
 
                         <ImageView
                             android:id="@+id/wind_icon"
@@ -115,7 +129,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/layout_background_temparature">
+                        android:background="@drawable/layout_background_temparature"
+                        android:visibility="invisible">
 
                         <ImageView
                             android:id="@+id/temparature_icon"
@@ -123,7 +138,7 @@
                             android:layout_height="40dp"
                             android:layout_margin="20dp"
                             android:layout_centerHorizontal="true"
-                            android:src="@drawable/temparature"/>
+                            android:src="@drawable/temparature" />
 
                         <TextView
                             android:id="@+id/temp_label"
@@ -136,7 +151,7 @@
                             android:layout_centerHorizontal="true"
                             android:text="@string/temp"
                             android:textSize="14sp"
-                            android:textColor="@color/mainActivityTextColor"/>
+                            android:textColor="@color/mainActivityTextColor" />
 
                     </RelativeLayout>
 
@@ -148,7 +163,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/layout_background_humidity">
+                        android:background="@drawable/layout_background_humidity"
+                        android:visibility="invisible">
 
 
                         <ImageView

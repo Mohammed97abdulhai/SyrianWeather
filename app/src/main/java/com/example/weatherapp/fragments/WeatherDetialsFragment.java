@@ -44,6 +44,7 @@ public class WeatherDetialsFragment extends DialogFragment {
         Picasso.with(getContext()).load("http://openweathermap.org/img/w/"+ model.getImage() + ".png").into(imageView);
         humidity.setText(String.valueOf(model.getHummidity()) + " %");
         windSpeed.setText(String.valueOf(model.getWindspeed()) + " m/s");
+
         return v;
     }
 }

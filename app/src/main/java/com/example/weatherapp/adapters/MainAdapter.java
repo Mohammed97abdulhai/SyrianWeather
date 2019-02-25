@@ -121,7 +121,6 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
 
             DialogFragment dialogFragment = WeatherDetialsFragment.newInstance(lists.get(i).get(position));
             dialogFragment.show(ft, "dialog");
-            Toast.makeText(context, "Position " + position, Toast.LENGTH_SHORT).show();
         };
 
         HorizontalAdapter adapter = new HorizontalAdapter(context,subItems, listener);

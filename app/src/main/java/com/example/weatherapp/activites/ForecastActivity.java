@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.weatherapp.APIs.WeatherApi;
@@ -32,6 +34,8 @@ public class ForecastActivity extends AppCompatActivity {
     ArrayList<String> tempartures;
     ArrayList<String> images;
     ArrayList<String> hours;
+
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,8 @@ public class ForecastActivity extends AppCompatActivity {
 
         TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
         toolbar_title.setText((CharSequence) getIntent().getExtras().get("name"));
+
+        progressBar = findViewById(R.id.progressbar_forecast);
 
 
         intiRecycler();
@@ -67,11 +73,11 @@ public class ForecastActivity extends AppCompatActivity {
 
 
 
-        // Set up progress before call
+        /*// Set up progress before call
         final ProgressDialog progressDoalog;
         progressDoalog = new ProgressDialog(ForecastActivity.this);
         // show it
-        progressDoalog.show();
+        progressDoalog.show();*/
 
         Call<ForecastResponse> call = weatherApi.getForecastByCityId(cityID,
                 "f0ca18a0a7c414bde9cd9d37a59890cd");
@@ -81,7 +87,8 @@ public class ForecastActivity extends AppCompatActivity {
             public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
 
 
-                progressDoalog.dismiss();
+                progressBar.setVisibility(View.GONE);
+                //progressDoalog.dismiss();
                 if(!response.isSuccessful())
                 {
                     Log.i("hello", String.valueOf(response.code()));

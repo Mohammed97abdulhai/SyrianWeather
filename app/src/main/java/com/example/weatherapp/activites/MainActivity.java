@@ -23,6 +23,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -59,7 +61,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ImageView windIcon;
     Button getForecasat;
 
+    RelativeLayout humidity_layout , wind_layout, temp_layout;
+
     ProgressDialog progressDoalog;
+    ProgressBar progressBar;
 
     //a string variable to save the chosen city name
     String city;
@@ -127,12 +132,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         windIcon = findViewById(R.id.wind_icon);
         getForecasat = findViewById(R.id.get_forecast);
 
-        // Set up progress before call
+
+        progressBar = findViewById(R.id.progressbar);
+
+        humidity_layout = findViewById(R.id.humidity_layout);
+        temp_layout = findViewById(R.id.temparature_layout);
+        wind_layout = findViewById(R.id.wind_layout);
+        /*// Set up progress before call
         progressDoalog = new ProgressDialog(MainActivity.this);
         progressDoalog.setMax(100);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         // show it
-        progressDoalog.show();
+        progressDoalog.show();*/
 
 
     }
@@ -212,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         city = (String) parent.getItemAtPosition(position);
+        progressBar.setVisibility(View.VISIBLE);
         switch (position) {
             case 0: {
                 Log.i("spinner", "clicked");
@@ -288,7 +300,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
 
 
-                progressDoalog.dismiss();
+                progressBar.setVisibility(View.GONE);
+
+                humidity_layout.setVisibility(View.VISIBLE);
+                temp_layout.setVisibility(View.VISIBLE);
+                wind_layout.setVisibility(View.VISIBLE);
                 if (!response.isSuccessful()) {
                     Log.i("failed1", String.valueOf(response.code()));
                 }
