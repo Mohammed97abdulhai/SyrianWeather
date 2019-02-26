@@ -27,8 +27,8 @@
 
     <ImageView
         android:id="@+id/weather_stats"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/main_temp"
         android:layout_marginTop="20dp"/>
@@ -104,6 +104,5 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="30dp"
         android:textColor="@android:color/black"/>
-
 
 </RelativeLayout>

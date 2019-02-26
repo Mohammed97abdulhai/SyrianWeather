@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_dialog">
+
+
+    <TextView
+        android:id="@+id/log_in_statment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="تطبيق yalla weather لعرض الطقس في كافة المحافظات"
+        android:textColor="@android:color/white" />
+
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_below="@id/log_in_statment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
+
+
+
+
+    <Button
+        android:id="@+id/rating_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_button"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:text="rate us"/>
+
+
+    <Button
+        android:id="@+id/sharing_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:layout_below="@id/login_button"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentRight="true"
+        android:paddingRight="20dp"
+        android:layout_marginRight="10dp"
+        android:text="share app"/>
+
+</RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.weatherapp.activites;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -8,14 +9,22 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Build;
 import android.os.SystemClock;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,17 +37,26 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.example.weatherapp.APIs.WeatherApi;
 import com.example.weatherapp.R;
 import com.example.weatherapp.adapters.HorizontalAdapter;
 import com.example.weatherapp.adapters.MainAdapter;
+import com.example.weatherapp.fragments.LogInFragment;
+import com.example.weatherapp.fragments.WeatherDetialsFragment;
+import com.example.weatherapp.models.ParentModel;
 import com.example.weatherapp.models.WeatherInfo;
 import com.example.weatherapp.models.WeatherResponse;
 import com.example.weatherapp.utils.MyReceiver;
 import com.example.weatherapp.utils.Util;
+import com.facebook.login.widget.LoginButton;
 import com.squareup.picasso.Picasso;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -72,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //a long variable to save the id of the chosen city
     long cityID;
 
+    public static  String Channel_ID = "id";
     static String [] conditionsEnglish = {"light rain","moderate rain","heavy intensity rain","very heavy rain","extreme rain","freezing rain","shower rain","clear sky","few clouds","scattered clouds","broken clouds","overcast clouds"};
     static String [] conditionsArabic = {"مطر خفيف","ماطر معتدل","ماطر بكثافة","ماطر بكثافة عالية ","ماطر بغزارة عالية جدا","ماطر متجمد","مطر مع برق","سماء صافية","غيوم قليلة","غيوم مبعثرة","غائم جزئيا","غائم كليا"};
 
@@ -81,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
 
+        Log.i("info",getKeyHash());
         /*Intent notifyIntent = new Intent(this,MyReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast
                 (this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -102,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
 
-
         getForecasat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             }
         });
-
 
     }
 
@@ -138,31 +156,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         humidity_layout = findViewById(R.id.humidity_layout);
         temp_layout = findViewById(R.id.temparature_layout);
         wind_layout = findViewById(R.id.wind_layout);
-        /*// Set up progress before call
-        progressDoalog = new ProgressDialog(MainActivity.this);
-        progressDoalog.setMax(100);
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        // show it
-        progressDoalog.show();*/
-
-
     }
 
 
-    public static  String Channel_ID = "id";
 
     private void scheduleNotification(Notification notification, int delay) {
 
-
-
         Intent notificationIntent = new Intent(this, MyReceiver.class);
         notificationIntent.putExtra(MyReceiver.NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(MyReceiver.NOTIFICATION, notification);
+        //notificationIntent.putExtra(MyReceiver.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 7);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 1);
 
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * delay, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     private Notification getNotification(String content) {
@@ -218,18 +233,41 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return builder.build();
     }
 
-    private WeatherApi getWeatherApiInstance()
+
+
+    public void showfragmentDialog()
     {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.openweathermap.org/data/2.5/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        FragmentManager manager = MainActivity.this.getSupportFragmentManager();
 
-        final WeatherApi weatherApi = retrofit.create(WeatherApi.class);
+        FragmentTransaction ft = manager.beginTransaction();
+        Fragment prev = MainActivity.this.getSupportFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
 
-        return weatherApi;
+
+        ParentModel model = new ParentModel();
+        LogInFragment logInFragment = LogInFragment.newInstance(model);
+        logInFragment.show(ft, "dialog");
     }
+    public void showdialog()
+    {
+
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+                .setTitle("You've hit the limit")
+                .setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.")
+                .addButton("UPGRADE", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.END, (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .addButton("downgrad",+1,+1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.CENTER, ((dialog, which) -> {}));;
+
+        builder.show();
+    }
+
+// Show the alert
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -303,16 +341,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Log.i("cityId", String.valueOf(cityID));
 
-        Call<WeatherResponse> call = getWeatherApiInstance().getWeatherByCityID(cityID,
+        Call<WeatherResponse> call = Util.getWeatherApiInstance().getWeatherByCityID(cityID,
                 "f0ca18a0a7c414bde9cd9d37a59890cd");
 
         call.enqueue(new Callback<WeatherResponse>() {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
 
-
+                //showdialog();
+                showfragmentDialog();
                 progressBar.setVisibility(View.GONE);
-
                 humidity_layout.setVisibility(View.VISIBLE);
                 temp_layout.setVisibility(View.VISIBLE);
                 wind_layout.setVisibility(View.VISIBLE);
@@ -357,7 +395,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 getForecasat.setVisibility(View.VISIBLE);
 
                 String notficationContent = "temparature: " + Util.kelvintoCelisuis((response.body().getDetailedWeather().getTemp())) + ", condition: " + response.body().getWeather().get(0).getDescription();
-                scheduleNotification(getNotification(notficationContent), 60*60);
+                scheduleNotification(getNotification(notficationContent), 60*60*24);
 
 
             }
@@ -368,6 +406,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Log.d("MainActivity", t.getMessage());
             }
         });
+
+    }
+
+    private String getKeyHash() {
+        PackageInfo info;
+        String keyHash = "";
+        try {
+            info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (android.content.pm.Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                keyHash = new String(Base64.encode(md.digest(), 0));
+            }
+        } catch (PackageManager.NameNotFoundException e1) {
+//            Log.e("name not found", e1.toString());
+        } catch (NoSuchAlgorithmException e) {
+//            Log.e("no such an algorithm", e.toString());
+        } catch (Exception e) {
+//            Log.e("exception", e.toString());
+        }
+
+        return keyHash;
 
     }
 

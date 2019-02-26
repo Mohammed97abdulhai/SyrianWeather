@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.models.ParentModel;
-import com.google.android.gms.common.ErrorDialogFragment;
 import com.squareup.picasso.Picasso;
 
 public class WeatherDetialsFragment extends DialogFragment {

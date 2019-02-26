@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#01378e</color>
+    <color name="colorPrimaryDark">#75baa7</color>
     <color name="colorAccent">#03DAC6</color>
     <color name="WeatherButtonColor"> #6666ff</color>
     <color name="WeatherButtonTextColor">#FFFFFF</color>
     <color name="mainActivityTextColor">#FFF</color>
     <color name="filterPrimary">#0073e6</color>
-    <color name="filterPrimaryDark">#004080</color>
+    <color name="filterPrimaryDark">#75baa7</color>
     <color name="toolbarBackground">#0073e6</color>
     <color name="mainActivityViews"></color>
 </resources>

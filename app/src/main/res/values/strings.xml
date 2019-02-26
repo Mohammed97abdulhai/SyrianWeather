@@ -6,6 +6,8 @@
     <string name="channel_name"> channel</string>
     <string name="channel_description"> channel description</string>
 
+    <string name="facebook_app_id">398155150962685</string>
+    <string name="fb_login_protocol_scheme">fb398155150962685</string>
     <string name="temp"> الحرارة</string>
     <string name="humidity"> الرطوبة</string>
     <string name="wind"> سرعة الرياح</string>

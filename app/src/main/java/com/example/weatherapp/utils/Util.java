@@ -4,12 +4,17 @@ import android.provider.DocumentsContract;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
+import com.example.weatherapp.APIs.WeatherApi;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Util {
 
@@ -53,5 +58,17 @@ public class Util {
         return week;
     }
 
+    static public WeatherApi getWeatherApiInstance()
+    {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.openweathermap.org/data/2.5/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        final WeatherApi weatherApi = retrofit.create(WeatherApi.class);
+
+        return weatherApi;
+    }
 
 }
