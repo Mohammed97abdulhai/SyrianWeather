@@ -1,6 +1,7 @@
 package com.example.weatherapp.activites;
 
 import android.app.ProgressDialog;
+import android.support.v4.text.BidiFormatter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -104,6 +105,7 @@ public class ForecastActivity extends AppCompatActivity {
                     tempartures.add(Util.kelvintoCelisuis(response.body().getResponse().get(i).getDetailedWeather().getTemp()));
                     images.add(response.body().getResponse().get(i).getWeather().get(0).getIcon());
 
+                    BidiFormatter myBidiFormatter = BidiFormatter.getInstance();
                     java.util.Date time=new java.util.Date((long)response.body().getResponse().get(i).getDt()*1000);
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(time);
@@ -117,7 +119,7 @@ public class ForecastActivity extends AppCompatActivity {
                     else
                     {
                         parentModel.hour = String.valueOf(currentHour)+":00 am";
-                        hours.add(String.valueOf(currentHour)+ ":00 am");
+                        hours.add(String.valueOf(currentHour)+":00 pm");
 
                     }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:autoMirrored="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
@@ -9,10 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
         android:padding="5dp"
         android:text="Hello World"
+        android:autoMirrored="true"
         android:textColor="@color/mainActivityTextColor"
         android:textStyle="bold" />
 
@@ -23,7 +25,7 @@
         android:layout_below="@id/day_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_gravity="center"
         android:layout_margin="2dp"
         card_view:cardBackgroundColor="#559EAE"
@@ -31,13 +33,13 @@
         card_view:cardElevation="4dp"
         card_view:cardUseCompatPadding="true">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/hours_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:padding="20dp"
-        android:orientation="horizontal" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/hours_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:padding="20dp"
+            android:orientation="horizontal" />
 
     </android.support.v7.widget.CardView>
 

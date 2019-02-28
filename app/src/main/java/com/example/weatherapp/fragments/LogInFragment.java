@@ -1,11 +1,14 @@
 package com.example.weatherapp.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,8 +34,9 @@ public class LogInFragment extends DialogFragment {
 
     TextView statement;
     Button loginFacebook;
-    Button rateUS;
-    Button share;
+    ImageView supportUs;
+    ImageButton rateUS;
+    ImageButton share;
     LoginButton loginButton;
     CallbackManager callbackManager;
     public static LogInFragment newInstance(ParentModel model)
@@ -50,10 +54,31 @@ public class LogInFragment extends DialogFragment {
     }
 
     @Override
+    public void onResume() {
+
+        super.onResume();
+        if(Build.VERSION.SDK_INT <= 20)
+        {
+
+            Log.i("small","penis");
+            int width = 300;
+            int height = 500;
+            getDialog().getWindow().setLayout(width, height);
+        }
+        else
+        {
+            int width = 700;
+            int height = 700;
+            getDialog().getWindow().setLayout(width, height);
+        }
+
+    }
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.log_in_dialog, container, false);
 
-        statement = v.findViewById(R.id.log_in_statment);
+
+        supportUs = v.findViewById(R.id.support_label);
         //The original Facebook button
         loginButton = v.findViewById(R.id.login_button);
 

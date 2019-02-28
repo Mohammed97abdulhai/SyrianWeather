@@ -20,6 +20,7 @@ import com.example.weatherapp.services.MyNewIntentService;
 import com.facebook.login.widget.LoginButton;
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,8 +42,11 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.i("info","hello");
-        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Log.i("info", "hello");
+        Calendar calendar = Calendar.getInstance();
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Call<WeatherResponse> call = Util.getWeatherApiInstance().getWeatherByCityID(170654,
                 "f0ca18a0a7c414bde9cd9d37a59890cd");
@@ -59,8 +63,6 @@ public class MyReceiver extends BroadcastReceiver {
                 double i = response.body().getDetailedWeather().getTemp();
 
 
-
-
                 String notficationContent = "temparature: " + Util.kelvintoCelisuis((response.body().getDetailedWeather().getTemp())) + ", condition: " + response.body().getWeather().get(0).getDescription();
                 Notification notification = getNotification(context, notficationContent);
                 int id = intent.getIntExtra(NOTIFICATION_ID, 0);
@@ -75,13 +77,12 @@ public class MyReceiver extends BroadcastReceiver {
         });
 
 
-
         /*Intent intent1 = new Intent(context, MyNewIntentService.class);
         context.startService(intent1);*/
     }
 
 
-    private Notification getNotification(Context context,String content) {
+    private Notification getNotification(Context context, String content) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 

@@ -12,6 +12,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.LayoutDirection;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,12 +75,9 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull XRecyclerView.ViewHolder viewHolder, int i) {
         ((Item)viewHolder).textView.setText(namesOfDays.get(i));
-        LinearLayoutManager childlayout = new LinearLayoutManager(context, LinearLayout.HORIZONTAL
-                ,false);
-
-        childlayout.setInitialPrefetchItemCount(4);
+        final LinearLayoutManager childlayout;
+        childlayout = new org.solovyev.android.views.llm.LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         ((Item) viewHolder).recyclerView.setLayoutManager(childlayout);
-        ((Item) viewHolder).recyclerView.setRecycledViewPool(viewPool);
 
         ((Item) viewHolder).recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL));
 

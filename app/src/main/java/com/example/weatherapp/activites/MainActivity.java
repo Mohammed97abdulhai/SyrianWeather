@@ -58,6 +58,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -110,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         init_views();
+
+        showfragmentDialog();
 
 
         ArrayAdapter<CharSequence> governeratesAdapter = ArrayAdapter.createFromResource(this, R.array.governorates,
@@ -165,19 +168,39 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent notificationIntent = new Intent(this, MyReceiver.class);
         notificationIntent.putExtra(MyReceiver.NOTIFICATION_ID, 1);
         //notificationIntent.putExtra(MyReceiver.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, 0);
 
-
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 7);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 1);
 
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        Calendar firingCal = Calendar.getInstance() ;
+        Calendar calendar = Calendar.getInstance();
+
+        firingCal.set(Calendar.HOUR_OF_DAY, 7);
+        firingCal.set(Calendar.MINUTE, 1);
+        firingCal.set(Calendar.SECOND, 1);
+        long intendedTime= firingCal.getTimeInMillis();
+        long currentTime= calendar.getTimeInMillis();
+
+        if (intendedTime >= currentTime) {
+            alarmManager.setRepeating(AlarmManager.RTC,
+                    intendedTime,
+                    AlarmManager.INTERVAL_DAY,
+                    pendingIntent);
+        }
+        else
+        {
+            firingCal.add(Calendar.DAY_OF_MONTH, 1);
+            intendedTime = firingCal.getTimeInMillis();
+            alarmManager.setRepeating(AlarmManager.RTC,
+                    intendedTime,
+                    AlarmManager.INTERVAL_DAY,
+                    pendingIntent);
+
+        }
+
+
+
     }
 
     private Notification getNotification(String content) {
@@ -349,7 +372,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
 
                 //showdialog();
-                showfragmentDialog();
                 progressBar.setVisibility(View.GONE);
                 humidity_layout.setVisibility(View.VISIBLE);
                 temp_layout.setVisibility(View.VISIBLE);

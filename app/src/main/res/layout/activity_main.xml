@@ -8,262 +8,262 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".activites.MainActivity">
+
+
+
+
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/logo"/>
+
+            <Spinner
+                android:id="@+id/city_name"
+                android:spinnerMode="dialog"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/logo"
+                android:layout_centerHorizontal="true"
+                android:paddingEnd="10dp"
+                android:prompt="@string/spinner_title"
+                android:textAlignment="gravity"
+                android:gravity="end"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_edit_text" />
+
+
+
+            <ImageView
+                android:id="@+id/weather_icon"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
+                android:layout_below="@id/city_name"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"/>
+
+
+
+            <TextView
+                android:id="@+id/weather_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/weather_icon"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/mainActivityTextColor"
+                android:textSize="20sp"
+                android:text="cloudy"
+                android:visibility="invisible"/>
+
+
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:max="100" />
+
+
+            <LinearLayout
+                android:id="@+id/details_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".activites.MainActivity">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/weather_description"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp">
 
 
 
-
-
-                <ImageView
-                    android:id="@+id/logo"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/logo"/>
-
-                <Spinner
-                    android:id="@+id/city_name"
-                    android:spinnerMode="dialog"
-                    android:layout_width="120dp"
+                <RelativeLayout
+                    android:id="@+id/wind_layout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/logo"
-                    android:layout_centerHorizontal="true"
-                    android:paddingRight="10dp"
-                    android:prompt="@string/spinner_title"
-                    android:textAlignment="gravity"
-                    android:gravity="right"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/custom_edit_text" />
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/layout_background_wind"
+                    android:visibility="invisible">
+
+                    <ImageView
+                        android:id="@+id/wind_icon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="20dp"
+                        android:src="@drawable/wind"
+                        android:layout_centerHorizontal="true"
+                        android:visibility="invisible"/>
+
+
+                    <TextView
+                        android:id="@+id/wind"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/wind_icon"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/wind"
+                        android:textSize="14sp"
+                        android:textColor="@color/mainActivityTextColor"
+                        android:visibility="invisible"/>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/temparature_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/layout_background_temparature"
+                    android:visibility="invisible">
+
+                    <ImageView
+                        android:id="@+id/temparature_icon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="20dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/temparature" />
+
+                    <TextView
+                        android:id="@+id/temp_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/temparature_icon"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/temp"
+                        android:textSize="14sp"
+                        android:textColor="@color/mainActivityTextColor" />
+
+                </RelativeLayout>
 
 
 
-                <ImageView
-                    android:id="@+id/weather_icon"
-                    android:layout_width="130dp"
-                    android:layout_height="60dp"
-                    android:layout_below="@id/city_name"
-                    android:layout_marginTop="30dp"
-                    android:layout_centerHorizontal="true"
-                    android:visibility="invisible"/>
+                <RelativeLayout
+                    android:id="@+id/humidity_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/layout_background_humidity"
+                    android:visibility="invisible">
+
+
+                    <ImageView
+                        android:id="@+id/humidity_icon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="20dp"
+                        android:src="@drawable/humidity"
+                        android:layout_centerHorizontal="true"
+                        android:visibility="invisible"/>
+
+
+
+                    <TextView
+                        android:id="@+id/humidity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/humidity_icon"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/humidity"
+                        android:textSize="14sp"
+                        android:textColor="@color/mainActivityTextColor"
+                        android:visibility="invisible" />
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/details_layout"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp">
 
 
 
                 <TextView
-                    android:id="@+id/weather_description"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/wind_details"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/weather_icon"
-                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/temp"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
                     android:textColor="@color/mainActivityTextColor"
-                    android:textSize="20sp"
-                    android:text="cloudy"
+                    android:background="@drawable/layout_background_wind"
+                    android:visibility="invisible"/>
+
+
+                <TextView
+                    android:id="@+id/temprature"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_marginStart="10dp"
+                    android:text="test"
+                    android:textColor="@color/mainActivityTextColor"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:background="@drawable/layout_background_temparature"
+                    android:visibility="invisible"/>
+
+
+                <TextView
+                    android:id="@+id/humidity_percentage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/mainActivityTextColor"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:background="@drawable/layout_background_humidity"
                     android:visibility="invisible"/>
 
 
 
-                <ProgressBar
-                    android:id="@+id/progressbar"
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:indeterminate="true"
-                    android:max="100" />
+
+            </LinearLayout>
 
 
-                <LinearLayout
-                    android:id="@+id/details_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/weather_description"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="20dp">
-
-
-
-                    <RelativeLayout
-                        android:id="@+id/wind_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/layout_background_wind"
-                        android:visibility="invisible">
-
-                        <ImageView
-                            android:id="@+id/wind_icon"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_margin="20dp"
-                            android:src="@drawable/wind"
-                            android:layout_centerHorizontal="true"
-                            android:visibility="invisible"/>
-
-
-                        <TextView
-                            android:id="@+id/wind"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/wind_icon"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_centerHorizontal="true"
-                            android:text="@string/wind"
-                            android:textSize="14sp"
-                            android:textColor="@color/mainActivityTextColor"
-                            android:visibility="invisible"/>
-
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/temparature_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/layout_background_temparature"
-                        android:visibility="invisible">
-
-                        <ImageView
-                            android:id="@+id/temparature_icon"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_margin="20dp"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/temparature" />
-
-                        <TextView
-                            android:id="@+id/temp_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/temparature_icon"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_centerHorizontal="true"
-                            android:text="@string/temp"
-                            android:textSize="14sp"
-                            android:textColor="@color/mainActivityTextColor" />
-
-                    </RelativeLayout>
-
-
-
-                    <RelativeLayout
-                        android:id="@+id/humidity_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/layout_background_humidity"
-                        android:visibility="invisible">
-
-
-                        <ImageView
-                            android:id="@+id/humidity_icon"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_margin="20dp"
-                            android:src="@drawable/humidity"
-                            android:layout_centerHorizontal="true"
-                            android:visibility="invisible"/>
-
-
-
-                        <TextView
-                            android:id="@+id/humidity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/humidity_icon"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_centerHorizontal="true"
-                            android:text="@string/humidity"
-                            android:textSize="14sp"
-                            android:textColor="@color/mainActivityTextColor"
-                            android:visibility="invisible" />
-                    </RelativeLayout>
-
-
-
-                </LinearLayout>
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/details_layout"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp">
-
-
-
-                    <TextView
-                        android:id="@+id/wind_details"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:layout_marginLeft="10dp"
-                        android:text="@string/temp"
-                        android:textSize="14sp"
-                        android:textAlignment="center"
-                        android:textColor="@color/mainActivityTextColor"
-                        android:background="@drawable/layout_background_wind"
-                        android:visibility="invisible"/>
-
-
-                    <TextView
-                        android:id="@+id/temprature"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:layout_marginLeft="10dp"
-                        android:text="test"
-                        android:textColor="@color/mainActivityTextColor"
-                        android:textSize="14sp"
-                        android:textAlignment="center"
-                        android:background="@drawable/layout_background_temparature"
-                        android:visibility="invisible"/>
-
-
-                    <TextView
-                        android:id="@+id/humidity_percentage"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:layout_marginLeft="10dp"
-                        android:textColor="@color/mainActivityTextColor"
-                        android:textSize="14sp"
-                        android:textAlignment="center"
-                        android:background="@drawable/layout_background_humidity"
-                        android:visibility="invisible"/>
-
-
-
-
-                </LinearLayout>
-
-
-            </RelativeLayout>
+        </RelativeLayout>
     </ScrollView>
 
     <android.support.design.button.MaterialButton
@@ -272,8 +272,8 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/get_forecast"
         android:textColor="@color/mainActivityTextColor"
         android:layout_alignParentBottom="true"
