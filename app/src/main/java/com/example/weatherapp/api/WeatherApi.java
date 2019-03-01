@@ -1,9 +1,7 @@
-package com.example.weatherapp.APIs;
+package com.example.weatherapp.api;
 
 import com.example.weatherapp.models.ForecastResponse;
 import com.example.weatherapp.models.WeatherResponse;
-
-import java.lang.annotation.Target;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -1,6 +1,5 @@
 package com.example.weatherapp.activites;
 
-import android.app.ProgressDialog;
 import android.support.v4.text.BidiFormatter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.weatherapp.APIs.WeatherApi;
 import com.example.weatherapp.R;
 import com.example.weatherapp.adapters.MainAdapter;
 import com.example.weatherapp.models.ForecastResponse;
@@ -19,15 +17,12 @@ import com.example.weatherapp.models.ParentModel;
 import com.example.weatherapp.utils.Util;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ForecastActivity extends AppCompatActivity {
 

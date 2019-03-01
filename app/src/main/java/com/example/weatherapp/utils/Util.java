@@ -1,10 +1,6 @@
 package com.example.weatherapp.utils;
 
-import android.provider.DocumentsContract;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-
-import com.example.weatherapp.APIs.WeatherApi;
+import com.example.weatherapp.api.WeatherApi;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

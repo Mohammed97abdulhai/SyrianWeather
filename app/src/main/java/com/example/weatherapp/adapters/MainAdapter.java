@@ -1,6 +1,5 @@
 package com.example.weatherapp.adapters;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -12,21 +11,16 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.LayoutDirection;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.weatherapp.APIs.RecyclerViewClickListener;
+import com.example.weatherapp.api.RecyclerViewClickListener;
 import com.example.weatherapp.R;
 import com.example.weatherapp.activites.ForecastActivity;
-import com.example.weatherapp.activites.MainActivity;
 import com.example.weatherapp.fragments.WeatherDetialsFragment;
-import com.example.weatherapp.models.DialogModel;
 import com.example.weatherapp.models.ParentModel;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 

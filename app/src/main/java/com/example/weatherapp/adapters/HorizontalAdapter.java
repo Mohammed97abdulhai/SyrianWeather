@@ -3,17 +3,15 @@ package com.example.weatherapp.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.weatherapp.APIs.RecyclerViewClickListener;
+import com.example.weatherapp.api.RecyclerViewClickListener;
 import com.example.weatherapp.R;
 import com.example.weatherapp.models.ParentModel;
-import com.example.weatherapp.utils.Util;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

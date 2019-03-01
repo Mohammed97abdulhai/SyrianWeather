@@ -1,4 +1,4 @@
-package com.example.weatherapp.APIs;
+package com.example.weatherapp.api;
 
 import android.view.View;
 
