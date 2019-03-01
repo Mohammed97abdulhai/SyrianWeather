@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //a long variable to save the id of the chosen city
     long cityID;
 
+    private static final String key = "f0ca18a0a7c414bde9cd9d37a59890cd";
     public static  String Channel_ID = "id";
     static long [] listOfCitiesID = {170654,172059,170063,169389,170017,169577,172408,172955,173334,169304,163345,173811,173480,163806};
     static String [] conditionsEnglish = {"light rain","moderate rain","heavy intensity rain","very heavy rain","extreme rain","freezing rain","shower rain","clear sky","few clouds","scattered clouds","broken clouds","overcast clouds"};
@@ -218,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder builder = new Notification.Builder(this);
-        builder.setContentTitle("حالة الطقس اليومية");
+        builder.setContentTitle(getString(R.string.notfication_title));
         builder.setContentText(content);
         builder.setContentIntent(resultPendingIntent);
         builder.setSmallIcon(R.mipmap.app_icon);
@@ -264,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void callWeatherData()
     {
         Call<WeatherResponse> call = Util.getWeatherApiInstance().getWeatherByCityID(cityID,
-                "f0ca18a0a7c414bde9cd9d37a59890cd");
+                key);
 
         call.enqueue(new Callback<WeatherResponse>() {
             @Override
@@ -284,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 temprature.setText(Util.kelvintoCelisuis(i));
 
 
-                Picasso.with(getApplicationContext()).load("http://openweathermap.org/img/w/" + info.get(0).getIcon() + ".png").into(weatherIcon);
+                Picasso.with(getApplicationContext()).load(getString(R.string.imageLink) + info.get(0).getIcon() + getString(R.string.pngSuffex)).into(weatherIcon);
                 weatherIcon.setVisibility(View.VISIBLE);
 
 
@@ -355,21 +356,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    private void createNotificationChannel() {
-        String CHANNEL_ID = "id";
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
 
 }

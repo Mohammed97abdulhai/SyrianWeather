@@ -11,6 +11,9 @@
     <string name="temp"> الحرارة</string>
     <string name="humidity"> الرطوبة</string>
     <string name="wind"> سرعة الرياح</string>
+    <string name="imageLink">http://openweathermap.org/img/w/</string>
+    <string name="pngSuffex">.png</string>
+    <string name="notfication_title">حالة الطقس اليومية</string>
 
     <string name="spinner_title"> اختر المحافظة</string>
 

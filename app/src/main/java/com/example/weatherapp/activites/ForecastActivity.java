@@ -42,13 +42,7 @@ public class ForecastActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
 
-
-        init_toolbar();
-
-        initProgressBar();
-
-        intiRecycler();
-
+        initViews();
         items = new ArrayList<>();
 
         callApi();
@@ -121,7 +115,16 @@ public class ForecastActivity extends AppCompatActivity {
     }
 
 
-    public void init_toolbar()
+    private void initViews()
+    {
+
+        initToolbar();
+
+        initProgressBar();
+
+        intiRecycler();
+    }
+    public void initToolbar()
     {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -84,9 +84,10 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
 
 
 
+
         if( i==0 )
         {
-            for(int index =0 ; index< items1.size(); index++)
+            for(int index =0 ; index < items1.size(); index++)
             {
 
                 if(items1.get(index).hour.equalsIgnoreCase("11:00 pm"))
@@ -108,7 +109,6 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
             if(i!=4)
             endDay = endDay + temp;
         }
-        Log.i("position0",String.valueOf(endDay) + "," + String.valueOf(i));
 
         RecyclerViewClickListener listener = (view, position) -> {
 

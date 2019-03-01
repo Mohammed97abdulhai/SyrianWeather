@@ -13,6 +13,8 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.models.ParentModel;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+
 public class WeatherDetialsFragment extends DialogFragment {
 
     private static final String Key = "key";
@@ -42,9 +44,9 @@ public class WeatherDetialsFragment extends DialogFragment {
 
         model = (ParentModel) getArguments().getSerializable(Key);
         textView.setText(model.getTemparature());
-        Picasso.with(getContext()).load("http://openweathermap.org/img/w/"+ model.getImage() + ".png").into(imageView);
-        humidity.setText(String.valueOf(model.getHummidity()) + " %");
-        windSpeed.setText(String.valueOf(model.getWindspeed()) + " m/s");
+        Picasso.with(getContext()).load(getString(R.string.imageLink) + model.getImage() + getString(R.string.pngSuffex)).into(imageView);
+        humidity.setText(String.valueOf(new DecimalFormat("#").format(model.getHummidity())) + " %");
+        windSpeed.setText(String.valueOf(new DecimalFormat("#.##").format(model.getWindspeed())) + " m/s");
 
 
         v.setOnClickListener(new View.OnClickListener() {

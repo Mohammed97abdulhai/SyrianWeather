@@ -43,7 +43,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         ((Item)viewHolder).textView.setText(items.get(i).temparature);
         ((Item) viewHolder).time.setText(items.get(i).hour);
-        Picasso.with(context).load("http://openweathermap.org/img/w/"+items.get(i).image+".png").into(((Item) viewHolder).imageView);
+        Picasso.with(context).load(context.getString(R.string.imageLink )+ items.get(i).image+context.getString(R.string.pngSuffex)).into(((Item) viewHolder).imageView);
     }
 
 
