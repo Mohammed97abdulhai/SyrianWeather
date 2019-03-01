@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:autoMirrored="true"
+    android:layoutDirection="ltr"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
@@ -14,7 +14,6 @@
         android:layout_marginEnd="10dp"
         android:padding="5dp"
         android:text="Hello World"
-        android:autoMirrored="true"
         android:textColor="@color/mainActivityTextColor"
         android:textStyle="bold" />
 

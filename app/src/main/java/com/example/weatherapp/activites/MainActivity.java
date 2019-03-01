@@ -56,6 +56,7 @@ import com.squareup.picasso.Picasso;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -82,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     RelativeLayout humidity_layout , wind_layout, temp_layout;
 
-    ProgressDialog progressDoalog;
     ProgressBar progressBar;
 
     //a string variable to save the chosen city name
@@ -102,12 +102,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         Log.i("info",getKeyHash());
-        /*Intent notifyIntent = new Intent(this,MyReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast
-                (this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-                1000 * 60, pendingIntent);*/
 
 
         init_views();
@@ -152,10 +146,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         humidityIcon = findViewById(R.id.humidity_icon);
         windIcon = findViewById(R.id.wind_icon);
         getForecasat = findViewById(R.id.get_forecast);
-
-
         progressBar = findViewById(R.id.progressbar);
-
         humidity_layout = findViewById(R.id.humidity_layout);
         temp_layout = findViewById(R.id.temparature_layout);
         wind_layout = findViewById(R.id.wind_layout);
@@ -403,13 +394,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
                 wind.setVisibility(View.VISIBLE);
-                windDetails.setText(String.valueOf(response.body().getWind().getSpeed()) + " m/h");
+                windDetails.setText(String.valueOf(new DecimalFormat("#.##").format(response.body().getWind().getSpeed())) + " m/h");
                 windDetails.setVisibility(View.VISIBLE);
 
                 windIcon.setVisibility(View.VISIBLE);
 
                 humidity.setVisibility(View.VISIBLE);
-                humidityPercentage.setText(String.valueOf(response.body().getDetailedWeather().getHumidity()) + "%");
+                humidityPercentage.setText(String.valueOf(new DecimalFormat("#").format(response.body().getDetailedWeather().getHumidity())) + "%");
                 humidityPercentage.setVisibility(View.VISIBLE);
 
                 humidityIcon.setVisibility(View.VISIBLE);

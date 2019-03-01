@@ -5,19 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:layoutDirection="ltr">
 
 
     <TextView
         android:id="@+id/time"
-        android:layout_width="84dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
         android:textColor="@color/mainActivityTextColor"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/mini_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

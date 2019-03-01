@@ -19,6 +19,7 @@ import com.example.weatherapp.models.ParentModel;
 import com.example.weatherapp.utils.Util;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -152,6 +153,8 @@ public class ForecastActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.days_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setPullRefreshEnabled(false);
+        recyclerView.setLoadingMoreEnabled(false);
 
     }
 

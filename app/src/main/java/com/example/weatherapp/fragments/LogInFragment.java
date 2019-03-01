@@ -31,14 +31,13 @@ import javax.security.auth.login.LoginException;
 
 public class LogInFragment extends DialogFragment {
 
-
-    TextView statement;
-    Button loginFacebook;
     ImageView supportUs;
     ImageButton rateUS;
     ImageButton share;
     LoginButton loginButton;
     CallbackManager callbackManager;
+
+
     public static LogInFragment newInstance(ParentModel model)
     {
         LogInFragment fragment = new LogInFragment();
@@ -59,8 +58,6 @@ public class LogInFragment extends DialogFragment {
         super.onResume();
         if(Build.VERSION.SDK_INT <= 20)
         {
-
-            Log.i("small","penis");
             int width = 300;
             int height = 500;
             getDialog().getWindow().setLayout(width, height);
@@ -68,7 +65,7 @@ public class LogInFragment extends DialogFragment {
         else
         {
             int width = 700;
-            int height = 700;
+            int height = 650;
             getDialog().getWindow().setLayout(width, height);
         }
 
