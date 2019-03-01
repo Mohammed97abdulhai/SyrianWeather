@@ -20,9 +20,6 @@ import java.util.ArrayList;
 
 public class HorizontalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    //ArrayList<String> items;
-    ArrayList<String> images;
-    ArrayList<String> hours;
 
     ArrayList<ParentModel> items;
 
@@ -31,8 +28,6 @@ public class HorizontalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public HorizontalAdapter(Context context, ArrayList<ParentModel> items , RecyclerViewClickListener listener) {
         this.context = context;
         this.items = items;
-        this.images = images;
-        this.hours = hours;
         this.mListener = listener;
     }
 

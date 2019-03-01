@@ -6,52 +6,36 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.app.TaskStackBuilder;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Build;
-import android.os.SystemClock;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.crowdfire.cfalertdialog.CFAlertDialog;
-import com.example.weatherapp.APIs.WeatherApi;
 import com.example.weatherapp.R;
-import com.example.weatherapp.adapters.HorizontalAdapter;
-import com.example.weatherapp.adapters.MainAdapter;
 import com.example.weatherapp.fragments.LogInFragment;
-import com.example.weatherapp.fragments.WeatherDetialsFragment;
 import com.example.weatherapp.models.ParentModel;
 import com.example.weatherapp.models.WeatherInfo;
 import com.example.weatherapp.models.WeatherResponse;
 import com.example.weatherapp.utils.MyReceiver;
 import com.example.weatherapp.utils.Util;
-import com.facebook.login.widget.LoginButton;
 import com.squareup.picasso.Picasso;
 
 import java.security.MessageDigest;
@@ -59,13 +43,10 @@ import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -266,22 +247,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         LogInFragment logInFragment = LogInFragment.newInstance(model);
         logInFragment.show(ft, "dialog");
     }
-    public void showdialog()
-    {
 
-        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
-                .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
-                .setTitle("You've hit the limit")
-                .setMessage("Looks like you've hit your usage limit. Upgrade to our paid plan to continue without any limits.")
-                .addButton("UPGRADE", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.END, (dialog, which) -> {
-                    dialog.dismiss();
-                })
-                .addButton("downgrad",+1,+1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.CENTER, ((dialog, which) -> {}));;
 
-        builder.show();
-    }
-
-// Show the alert
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -362,7 +329,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
 
-                //showdialog();
                 progressBar.setVisibility(View.GONE);
                 humidity_layout.setVisibility(View.VISIBLE);
                 temp_layout.setVisibility(View.VISIBLE);
@@ -371,7 +337,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     Log.i("failed1", String.valueOf(response.code()));
                 }
                 List<WeatherInfo> info = response.body().getWeather();
-                String weatherStatus = info.get(0).getMain();
                 double i = response.body().getDetailedWeather().getTemp();
 
                 temprature.setVisibility(View.VISIBLE);

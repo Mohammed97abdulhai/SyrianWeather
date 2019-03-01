@@ -50,6 +50,7 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
 
 
     int endDay =0;
+    
 
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
@@ -83,7 +84,7 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
 
 
 
-        if( i==0)
+        if( i==0 )
         {
             for(int index =0 ; index< items1.size(); index++)
             {
@@ -101,10 +102,13 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
         }
         else {
 
-            subItems = new ArrayList<>(items1.subList(endDay,endDay+8));
+            int temp = 8;
+            subItems = new ArrayList<>(items1.subList(endDay,endDay+temp));
             lists.add(subItems);
-            endDay = endDay + 8;
+            if(i!=4)
+            endDay = endDay + temp;
         }
+        Log.i("position0",String.valueOf(endDay) + "," + String.valueOf(i));
 
         RecyclerViewClickListener listener = (view, position) -> {
 

@@ -34,8 +34,6 @@ public class ForecastActivity extends AppCompatActivity {
     XRecyclerView recyclerView;
     ArrayList<ParentModel> items;
     ArrayList<String> tempartures;
-    ArrayList<String> images;
-    ArrayList<String> hours;
 
     ProgressBar progressBar;
     @Override
@@ -60,28 +58,12 @@ public class ForecastActivity extends AppCompatActivity {
         items = new ArrayList<>();
 
         tempartures = new ArrayList<>();
-        images = new ArrayList<>();
-        hours = new ArrayList<>();
 
         long cityID = (long) getIntent().getExtras().get("city");
 
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.openweathermap.org/data/2.5/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        final WeatherApi weatherApi = retrofit.create(WeatherApi.class);
-
-
-
-        /*// Set up progress before call
-        final ProgressDialog progressDoalog;
-        progressDoalog = new ProgressDialog(ForecastActivity.this);
-        // show it
-        progressDoalog.show();*/
-
-        Call<ForecastResponse> call = weatherApi.getForecastByCityId(cityID,
+        Call<ForecastResponse> call = Util.getWeatherApiInstance().getForecastByCityId(cityID,
                 "f0ca18a0a7c414bde9cd9d37a59890cd");
 
         call.enqueue(new Callback<ForecastResponse>() {
@@ -90,7 +72,6 @@ public class ForecastActivity extends AppCompatActivity {
 
 
                 progressBar.setVisibility(View.GONE);
-                //progressDoalog.dismiss();
                 if(!response.isSuccessful())
                 {
                     Log.i("hello", String.valueOf(response.code()));
@@ -104,7 +85,6 @@ public class ForecastActivity extends AppCompatActivity {
                     parentModel.image = response.body().getResponse().get(i).getWeather().get(0).getIcon();
 
                     tempartures.add(Util.kelvintoCelisuis(response.body().getResponse().get(i).getDetailedWeather().getTemp()));
-                    images.add(response.body().getResponse().get(i).getWeather().get(0).getIcon());
 
                     BidiFormatter myBidiFormatter = BidiFormatter.getInstance();
                     java.util.Date time=new java.util.Date((long)response.body().getResponse().get(i).getDt()*1000);
@@ -115,12 +95,10 @@ public class ForecastActivity extends AppCompatActivity {
                     {
                         currentHour = currentHour - 12;
                         parentModel.hour = String.valueOf(currentHour)+":00 pm";
-                        hours.add(String.valueOf(currentHour)+":00 pm");
                     }
                     else
                     {
                         parentModel.hour = String.valueOf(currentHour)+":00 am";
-                        hours.add(String.valueOf(currentHour)+":00 pm");
 
                     }
 
