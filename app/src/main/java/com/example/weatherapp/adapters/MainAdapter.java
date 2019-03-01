@@ -50,7 +50,7 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
 
 
     int endDay =0;
-    
+
 
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 

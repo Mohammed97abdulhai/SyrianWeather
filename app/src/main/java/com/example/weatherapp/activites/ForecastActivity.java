@@ -33,35 +33,31 @@ public class ForecastActivity extends AppCompatActivity {
 
     XRecyclerView recyclerView;
     ArrayList<ParentModel> items;
-    ArrayList<String> tempartures;
-
     ProgressBar progressBar;
+    Toolbar toolbar;
+    TextView toolbar_title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        TextView toolbar_title = toolbar.findViewById(R.id.toolbar_title);
-        toolbar_title.setText((CharSequence) getIntent().getExtras().get("name"));
+        init_toolbar();
 
-        progressBar = findViewById(R.id.progressbar_forecast);
-
+        initProgressBar();
 
         intiRecycler();
 
         items = new ArrayList<>();
 
-        tempartures = new ArrayList<>();
+        callApi();
+    }
+
+    private void callApi()
+    {
 
         long cityID = (long) getIntent().getExtras().get("city");
-
-
 
         Call<ForecastResponse> call = Util.getWeatherApiInstance().getForecastByCityId(cityID,
                 "f0ca18a0a7c414bde9cd9d37a59890cd");
@@ -84,7 +80,6 @@ public class ForecastActivity extends AppCompatActivity {
                     parentModel.windspeed = response.body().getResponse().get(i).getWind().getSpeed();
                     parentModel.image = response.body().getResponse().get(i).getWeather().get(0).getIcon();
 
-                    tempartures.add(Util.kelvintoCelisuis(response.body().getResponse().get(i).getDetailedWeather().getTemp()));
 
                     BidiFormatter myBidiFormatter = BidiFormatter.getInstance();
                     java.util.Date time=new java.util.Date((long)response.body().getResponse().get(i).getDt()*1000);
@@ -116,13 +111,28 @@ public class ForecastActivity extends AppCompatActivity {
 
             }
         });
-
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+
+    public void init_toolbar()
+    {
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+        toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+        toolbar_title.setText((CharSequence) getIntent().getExtras().get("name"));
+
     }
 
 
@@ -134,6 +144,11 @@ public class ForecastActivity extends AppCompatActivity {
         recyclerView.setPullRefreshEnabled(false);
         recyclerView.setLoadingMoreEnabled(false);
 
+    }
+    private void initProgressBar()
+    {
+
+        progressBar = findViewById(R.id.progressbar_forecast);
     }
 
 }

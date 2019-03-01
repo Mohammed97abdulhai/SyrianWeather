@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     long cityID;
 
     public static  String Channel_ID = "id";
+    static long [] listOfCitiesID = {170654,172059,170063,169389,170017,169577,172408,172955,173334,169304,163345,173811,173480,163806};
     static String [] conditionsEnglish = {"light rain","moderate rain","heavy intensity rain","very heavy rain","extreme rain","freezing rain","shower rain","clear sky","few clouds","scattered clouds","broken clouds","overcast clouds"};
     static String [] conditionsArabic = {"مطر خفيف","ماطر معتدل","ماطر بكثافة","ماطر بكثافة عالية ","ماطر بغزارة عالية جدا","ماطر متجمد","مطر مع برق","سماء صافية","غيوم قليلة","غيوم مبعثرة","غائم جزئيا","غائم كليا"};
 
@@ -95,9 +96,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         governeratesAdapter.setDropDownViewResource(R.layout.spinner_item);
         cityName.setAdapter(governeratesAdapter);
         cityName.setOnItemSelectedListener(this);
-
-
-
 
 
         getForecasat.setOnClickListener(new View.OnClickListener() {
@@ -253,75 +251,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         city = (String) parent.getItemAtPosition(position);
+
+        cityID = listOfCitiesID[position];
+
         progressBar.setVisibility(View.VISIBLE);
-        switch (position) {
-            case 0: {
-                Log.i("spinner", "clicked");
-                cityID = 170654;
 
-            }
-            break;
-            case 1: {
-
-                Log.i("spinner", "clicked");
-                cityID = 172059;
-            }
-            break;
-            case 2: {
-                cityID = 170063;
-            }
-            break;
-            case 3: {
-                cityID = 169389;
-            }
-            break;
-            case 4: {
-                cityID = 170017;
-            }
-            break;
-            case 5: {
-                cityID = 169577;
-            }
-            break;
-            case 6: {
-                cityID = 172408;
-            }
-            break;
-            case 7: {
-                cityID = 172955;
-            }
-            break;
-            case 8: {
-                cityID = 173334;
-            }
-            break;
-            case 9: {
-                cityID = 169304;
-            }
-            break;
-            case 10: {
-                cityID = 163345;
-            }
-            break;
-            case 11: {
-                cityID = 173811;
-            }
-            break;
-            case 12: {
-                cityID = 173480;
-            }
-            break;
-            case 13: {
-                cityID = 163806;
-            }
-            break;
-
-        }
-
-
-
+        callWeatherData();
         Log.i("cityId", String.valueOf(cityID));
 
+    }
+
+    private void callWeatherData()
+    {
         Call<WeatherResponse> call = Util.getWeatherApiInstance().getWeatherByCityID(cityID,
                 "f0ca18a0a7c414bde9cd9d37a59890cd");
 
@@ -386,7 +327,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
 
     }
-
     private String getKeyHash() {
         PackageInfo info;
         String keyHash = "";
