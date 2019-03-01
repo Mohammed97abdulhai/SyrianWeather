@@ -242,8 +242,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ft.addToBackStack(null);
 
 
-        ParentModel model = new ParentModel();
-        LogInFragment logInFragment = LogInFragment.newInstance(model);
+        LogInFragment logInFragment = LogInFragment.newInstance();
         logInFragment.show(ft, "dialog");
     }
 

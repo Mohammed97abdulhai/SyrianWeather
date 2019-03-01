@@ -38,11 +38,10 @@ public class LogInFragment extends DialogFragment {
     CallbackManager callbackManager;
 
 
-    public static LogInFragment newInstance(ParentModel model)
+    public static LogInFragment newInstance()
     {
         LogInFragment fragment = new LogInFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("",model);
         fragment.setArguments(bundle);
 
         return fragment;
