@@ -5,14 +5,14 @@
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context=".activites.MainActivity">
 
 
@@ -87,7 +87,9 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="10dp"
-                android:layoutDirection="ltr">
+                android:layoutDirection="ltr"
+                android:baselineAligned="false"
+                android:visibility="invisible">
 
 
 
@@ -97,8 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
-                    android:background="@drawable/layout_background_wind"
-                    android:visibility="invisible">
+                    android:background="@drawable/layout_background_wind">
 
                     <ImageView
                         android:id="@+id/wind_icon"
@@ -107,7 +108,7 @@
                         android:layout_margin="20dp"
                         android:src="@drawable/wind"
                         android:layout_centerHorizontal="true"
-                        android:visibility="invisible"/>
+                        />
 
 
                     <TextView
@@ -122,7 +123,7 @@
                         android:text="@string/wind"
                         android:textSize="14sp"
                         android:textColor="@color/mainActivityTextColor"
-                        android:visibility="invisible"/>
+                        />
 
 
                 </RelativeLayout>
@@ -134,7 +135,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/layout_background_temparature"
-                    android:visibility="invisible">
+                    >
 
                     <ImageView
                         android:id="@+id/temparature_icon"
@@ -168,7 +169,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/layout_background_humidity"
-                    android:visibility="invisible">
+                    >
 
 
                     <ImageView
@@ -178,7 +179,7 @@
                         android:layout_margin="20dp"
                         android:src="@drawable/humidity"
                         android:layout_centerHorizontal="true"
-                        android:visibility="invisible"/>
+                        />
 
 
 
@@ -194,16 +195,15 @@
                         android:text="@string/humidity"
                         android:textSize="14sp"
                         android:textColor="@color/mainActivityTextColor"
-                        android:visibility="invisible" />
+                         />
                 </RelativeLayout>
-
-
 
             </LinearLayout>
 
 
 
             <LinearLayout
+                android:id="@+id/details_values_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -211,7 +211,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
-                android:layoutDirection="ltr">
+                android:layoutDirection="ltr"
+                android:visibility="invisible">
 
 
 
@@ -227,8 +228,7 @@
                     android:textSize="14sp"
                     android:textAlignment="center"
                     android:textColor="@color/mainActivityTextColor"
-                    android:background="@drawable/layout_background_wind"
-                    android:visibility="invisible"/>
+                    android:background="@drawable/layout_background_wind" />
 
 
                 <TextView
@@ -243,8 +243,7 @@
                     android:textColor="@color/mainActivityTextColor"
                     android:textSize="14sp"
                     android:textAlignment="center"
-                    android:background="@drawable/layout_background_temparature"
-                    android:visibility="invisible"/>
+                    android:background="@drawable/layout_background_temparature" />
 
 
                 <TextView
@@ -259,9 +258,7 @@
                     android:textSize="14sp"
                     android:textAlignment="center"
                     android:background="@drawable/layout_background_humidity"
-                    android:visibility="invisible"/>
-
-
+                    />
 
 
             </LinearLayout>

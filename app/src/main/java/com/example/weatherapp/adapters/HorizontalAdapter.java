@@ -50,6 +50,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return items.size();
     }
 
+
     class Item extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 

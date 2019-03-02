@@ -30,18 +30,22 @@ public class ForecastActivity extends AppCompatActivity {
     ArrayList<ParentModel> items;
     ProgressBar progressBar;
     Toolbar toolbar;
-    TextView toolbar_title;
+    TextView toolbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
 
-        initViews();
+
         items = new ArrayList<>();
+
+        initViews();
+
 
         callApi();
     }
+
 
     private void callApi()
     {
@@ -92,6 +96,7 @@ public class ForecastActivity extends AppCompatActivity {
 
                 MainAdapter adapter = new MainAdapter(ForecastActivity.this,Util.intiDays(),items);
                 recyclerView.setAdapter(adapter);
+
                 Log.i("hello",response.body().getResponse().get(0).getWeather().get(0).getMain());
             }
 
@@ -127,9 +132,8 @@ public class ForecastActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
-        toolbar_title = toolbar.findViewById(R.id.toolbar_title);
-        toolbar_title.setText((CharSequence) getIntent().getExtras().get("name"));
+        toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+        toolbarTitle.setText((CharSequence) getIntent().getExtras().get("name"));
 
     }
 
@@ -141,6 +145,7 @@ public class ForecastActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setPullRefreshEnabled(false);
         recyclerView.setLoadingMoreEnabled(false);
+
 
     }
     private void initProgressBar()

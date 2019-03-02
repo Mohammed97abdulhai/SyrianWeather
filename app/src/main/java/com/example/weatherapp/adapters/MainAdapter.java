@@ -43,7 +43,7 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
     ArrayList<ArrayList<ParentModel>> lists;
 
 
-    int endDay =0;
+    int beginLoop = 0;
 
 
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
@@ -77,32 +77,18 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
         ((Item) viewHolder).recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL));
 
 
-
-
-        if( i==0 )
+        for (int index = beginLoop; index < items1.size(); index ++)
         {
-            for(int index =0 ; index < items1.size(); index++)
+            if(items1.get(index).hour.equalsIgnoreCase("11:00 pm"))
             {
-
-                if(items1.get(index).hour.equalsIgnoreCase("11:00 pm"))
-                {
-                    Log.i("hello",items1.get(index).hour);
-                    endDay = index+1;
-                    break;
-                }
+                Log.i("index",String.valueOf(beginLoop)+ ", " + String.valueOf(index+1));
+                subItems = new ArrayList<>(items1.subList(beginLoop , index+1));
+                lists.add(subItems);
+                beginLoop = index+1;
+                break;
             }
-
-            subItems = new ArrayList<>(items1.subList(0,endDay));
-            lists.add(subItems);
         }
-        else {
 
-            int temp = 8;
-            subItems = new ArrayList<>(items1.subList(endDay,endDay+temp));
-            lists.add(subItems);
-            if(i!=4)
-            endDay = endDay + temp;
-        }
 
         RecyclerViewClickListener listener = (view, position) -> {
 
@@ -119,6 +105,7 @@ public class MainAdapter extends XRecyclerView.Adapter<XRecyclerView.ViewHolder>
             dialogFragment.show(ft, "dialog");
         };
 
+        //Log.i("index", String.valueOf(subItems.size()));
         HorizontalAdapter adapter = new HorizontalAdapter(context,subItems, listener);
         ((Item) viewHolder).recyclerView.setAdapter(adapter);
     }

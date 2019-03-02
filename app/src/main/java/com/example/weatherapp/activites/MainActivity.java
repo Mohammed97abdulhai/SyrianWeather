@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -62,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ImageView windIcon;
     Button getForecasat;
 
-    RelativeLayout humidity_layout , wind_layout, temp_layout;
+    LinearLayout detailsLayout, valuesLayout;
+
 
     ProgressBar progressBar;
 
@@ -127,14 +129,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         windIcon = findViewById(R.id.wind_icon);
         getForecasat = findViewById(R.id.get_forecast);
         progressBar = findViewById(R.id.progressbar);
-        humidity_layout = findViewById(R.id.humidity_layout);
-        temp_layout = findViewById(R.id.temparature_layout);
-        wind_layout = findViewById(R.id.wind_layout);
+
+        detailsLayout = findViewById(R.id.details_layout);
+        valuesLayout = findViewById(R.id.details_values_layout);
     }
 
 
 
-    private void scheduleNotification(Notification notification, int delay) {
+    private void startBroadCastReciever() {
 
         Intent notificationIntent = new Intent(this, MyReceiver.class);
         notificationIntent.putExtra(MyReceiver.NOTIFICATION_ID, 1);
@@ -171,62 +173,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
 
-
     }
-
-    private Notification getNotification(String content) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-
-            Intent activityIntent = new Intent(this, MainActivity.class);
-
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-            stackBuilder.addNextIntentWithParentStack(activityIntent);
-
-            PendingIntent resultPendingIntent =
-                    stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
-
-            int importance = NotificationManager.IMPORTANCE_LOW;
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
-
-            NotificationChannel channel = new NotificationChannel(Channel_ID, name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-
-
-            Notification.Builder builder = new Notification.Builder(this);
-            builder.setContentTitle("حالة الطقس اليومية");
-            builder.setContentText(content);
-            builder.setContentIntent(resultPendingIntent);
-            builder.setSmallIcon(R.mipmap.app_icon);
-            builder.setChannelId(Channel_ID);
-
-            return builder.build();
-
-        }
-
-        Intent activityIntent = new Intent(this, MainActivity.class);
-
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addNextIntentWithParentStack(activityIntent);
-
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Notification.Builder builder = new Notification.Builder(this);
-        builder.setContentTitle(getString(R.string.notfication_title));
-        builder.setContentText(content);
-        builder.setContentIntent(resultPendingIntent);
-        builder.setSmallIcon(R.mipmap.app_icon);
-
-        return builder.build();
-    }
-
 
 
     public void showfragmentDialog()
@@ -271,9 +218,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
 
                 progressBar.setVisibility(View.GONE);
-                humidity_layout.setVisibility(View.VISIBLE);
-                temp_layout.setVisibility(View.VISIBLE);
-                wind_layout.setVisibility(View.VISIBLE);
+                detailsLayout.setVisibility(View.VISIBLE);
+                valuesLayout.setVisibility(View.VISIBLE);
+
                 if (!response.isSuccessful()) {
                     Log.i("failed1", String.valueOf(response.code()));
                 }
@@ -299,23 +246,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 weatherDescription.setVisibility(View.VISIBLE);
 
 
-                wind.setVisibility(View.VISIBLE);
                 windDetails.setText(String.valueOf(new DecimalFormat("#.##").format(response.body().getWind().getSpeed())) + " m/h");
-                windDetails.setVisibility(View.VISIBLE);
 
-                windIcon.setVisibility(View.VISIBLE);
 
-                humidity.setVisibility(View.VISIBLE);
                 humidityPercentage.setText(String.valueOf(new DecimalFormat("#").format(response.body().getDetailedWeather().getHumidity())) + "%");
-                humidityPercentage.setVisibility(View.VISIBLE);
 
-                humidityIcon.setVisibility(View.VISIBLE);
+
 
                 getForecasat.setVisibility(View.VISIBLE);
 
-                String notficationContent = "temparature: " + Util.kelvintoCelisuis((response.body().getDetailedWeather().getTemp())) + ", condition: " + response.body().getWeather().get(0).getDescription();
-                scheduleNotification(getNotification(notficationContent), 60*60*24);
-
+                startBroadCastReciever();
 
             }
 
