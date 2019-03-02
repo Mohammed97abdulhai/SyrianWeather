@@ -178,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void showfragmentDialog()
     {
-
         FragmentManager manager = MainActivity.this.getSupportFragmentManager();
 
         FragmentTransaction ft = manager.beginTransaction();
@@ -187,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             ft.remove(prev);
         }
         ft.addToBackStack(null);
-
 
         LogInFragment logInFragment = LogInFragment.newInstance();
         logInFragment.show(ft, "dialog");
@@ -216,24 +214,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         call.enqueue(new Callback<WeatherResponse>() {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
-
+                if (!response.isSuccessful()) {
+                    Log.i("failed1", String.valueOf(response.code()));
+                    return ;
+                }
                 progressBar.setVisibility(View.GONE);
                 detailsLayout.setVisibility(View.VISIBLE);
                 valuesLayout.setVisibility(View.VISIBLE);
 
-                if (!response.isSuccessful()) {
-                    Log.i("failed1", String.valueOf(response.code()));
-                }
                 List<WeatherInfo> info = response.body().getWeather();
                 double i = response.body().getDetailedWeather().getTemp();
-
                 temprature.setVisibility(View.VISIBLE);
                 temprature.setText(Util.kelvintoCelisuis(i));
 
-
                 Picasso.with(getApplicationContext()).load(getString(R.string.imageLink) + info.get(0).getIcon() + getString(R.string.pngSuffex)).into(weatherIcon);
                 weatherIcon.setVisibility(View.VISIBLE);
-
 
                 for(int index=0;index<conditionsEnglish.length; index++)
                 {
@@ -245,13 +240,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 weatherDescription.setVisibility(View.VISIBLE);
 
-
                 windDetails.setText(String.valueOf(new DecimalFormat("#.##").format(response.body().getWind().getSpeed())) + " m/h");
 
-
                 humidityPercentage.setText(String.valueOf(new DecimalFormat("#").format(response.body().getDetailedWeather().getHumidity())) + "%");
-
-
 
                 getForecasat.setVisibility(View.VISIBLE);
 
