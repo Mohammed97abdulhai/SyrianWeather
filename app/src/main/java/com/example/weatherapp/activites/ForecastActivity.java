@@ -37,18 +37,15 @@ public class ForecastActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
 
-
         items = new ArrayList<>();
 
         initViews();
-
 
         callApi();
     }
 
 
-    private void callApi()
-    {
+    private void callApi() {
 
         long cityID = (long) getIntent().getExtras().get("city");
 
@@ -61,12 +58,10 @@ public class ForecastActivity extends AppCompatActivity {
 
 
                 progressBar.setVisibility(View.GONE);
-                if(!response.isSuccessful())
-                {
+                if (!response.isSuccessful()) {
                     Log.i("hello", String.valueOf(response.code()));
                 }
-                for(int i=0;i<response.body().getResponse().size();i++)
-                {
+                for (int i = 0; i < response.body().getResponse().size(); i++) {
                     ParentModel parentModel = new ParentModel();
                     parentModel.temparature = Util.kelvintoCelisuis(response.body().getResponse().get(i).getDetailedWeather().getTemp());
                     parentModel.hummidity = response.body().getResponse().get(i).getDetailedWeather().getHumidity();
@@ -74,30 +69,25 @@ public class ForecastActivity extends AppCompatActivity {
                     parentModel.image = response.body().getResponse().get(i).getWeather().get(0).getIcon();
 
 
-                    BidiFormatter myBidiFormatter = BidiFormatter.getInstance();
-                    java.util.Date time=new java.util.Date((long)response.body().getResponse().get(i).getDt()*1000);
+                    java.util.Date time = new java.util.Date(response.body().getResponse().get(i).getDt() * 1000);
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(time);
                     int currentHour = cal.get(Calendar.HOUR_OF_DAY);
-                    if(currentHour > 12)
-                    {
+                    if (currentHour > 12) {
                         currentHour = currentHour - 12;
-                        parentModel.hour = String.valueOf(currentHour)+":00 pm";
-                    }
-                    else
-                    {
-                        parentModel.hour = String.valueOf(currentHour)+":00 am";
-
+                        parentModel.hour = String.valueOf(currentHour) + ":00 pm";
+                    } else {
+                        parentModel.hour = String.valueOf(currentHour) + ":00 am";
                     }
 
                     items.add(parentModel);
 
                 }
 
-                MainAdapter adapter = new MainAdapter(ForecastActivity.this,Util.intiDays(),items);
+                MainAdapter adapter = new MainAdapter(ForecastActivity.this, Util.intiDays(), items);
                 recyclerView.setAdapter(adapter);
 
-                Log.i("hello",response.body().getResponse().get(0).getWeather().get(0).getMain());
+                Log.i("hello", response.body().getResponse().get(0).getWeather().get(0).getMain());
             }
 
             @Override
@@ -115,17 +105,15 @@ public class ForecastActivity extends AppCompatActivity {
     }
 
 
-    private void initViews()
-    {
-
+    private void initViews() {
         initToolbar();
 
         initProgressBar();
 
         intiRecycler();
     }
-    public void initToolbar()
-    {
+
+    public void initToolbar() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -134,23 +122,18 @@ public class ForecastActivity extends AppCompatActivity {
 
         toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
         toolbarTitle.setText((CharSequence) getIntent().getExtras().get("name"));
-
     }
 
 
-    private void intiRecycler()
-    {
+    private void intiRecycler() {
         recyclerView = findViewById(R.id.days_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setPullRefreshEnabled(false);
         recyclerView.setLoadingMoreEnabled(false);
-
-
     }
-    private void initProgressBar()
-    {
 
+    private void initProgressBar() {
         progressBar = findViewById(R.id.progressbar_forecast);
     }
 
