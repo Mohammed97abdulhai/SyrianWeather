@@ -30,36 +30,83 @@
         android:layout_marginStart="10dp"/>
 
 
+
+    <ImageButton
+        android:id="@+id/sharing_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/login_button"
+        android:background="@drawable/share_button"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="80dp" />
+
+
+
+    <TextView
+        android:id="@+id/share_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sharing_button"
+        android:text="@string/shareLabel"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="80dp"
+        android:textColor="@color/mainActivityTextColor"/>
+
+
+
+
+    <ImageButton
+        android:id="@+id/rating_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/login_button"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rate_icon"
+        android:contentDescription="@string/rateLabel"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="10pt" />
+
+
+
+    <TextView
+        android:id="@+id/rate_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rating_button"
+        android:layout_alignEnd="@id/rating_button"
+        android:layout_marginEnd="10dp"
+        android:text="@string/rateLabel"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/mainActivityTextColor"/>
+
     <LinearLayout
+        android:id="@+id/tool_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_button"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        android:layout_marginBottom="20pt">
+        android:layout_marginBottom="7pt">
 
 
-        <ImageButton
-            android:id="@+id/sharing_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/share_button"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="80dp" />
-
-
-        <ImageButton
-            android:id="@+id/rating_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rate_icon"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="10pt" />
 
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tool_layout"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+
+
+    </LinearLayout>
+
 
 
 
