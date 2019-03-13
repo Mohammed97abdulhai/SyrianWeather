@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.weatherapp"
+        applicationId "com.yalagroup.weather"
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
@@ -36,8 +36,7 @@ dependencies {
     implementation 'com.jcodecraeer:xrecyclerview:1.5.9'
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
-    implementation 'com.facebook.android:facebook-login:[4,5)'
-    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.facebook.android:facebook-android-sdk:4.41.0'
     implementation 'org.solovyev.android.views:linear-layout-manager:0.5@aar'
     implementation'com.chootdev:typefaced:1.1.7'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

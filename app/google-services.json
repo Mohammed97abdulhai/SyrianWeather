@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:414544456194:android:5c5940e3d63ed283",
         "android_client_info": {
-          "package_name": "com.example.weatherapp"
+          "package_name": "com.yalagroup.weather"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "414544456194-s8bk6hmgpv8mcdbr5po85jgtq4nt8f2k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.weatherapp",
+            "package_name": "com.yalagroup.weather",
             "certificate_hash": "136f3969ea8ea1ae54dcba136420fee5dbc7505c"
           }
         },

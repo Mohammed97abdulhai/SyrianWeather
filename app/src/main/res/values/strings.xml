@@ -1,13 +1,14 @@
 <resources>
-    <string name="app_name">Weather APP</string>
+    <string name="app_name">Yala Weather</string>
     <string name="enter_city_name"> Enter city name</string>
     <string name="get_weather"> Get Weather</string>
-    <string name="get_forecast"> Get FUll Forecast</string>
+    <string name="get_forecast"> عرض معلومات الطقس الكاملة</string>
     <string name="channel_name"> channel</string>
     <string name="channel_description"> channel description</string>
 
-    <string name="facebook_app_id">398155150962685</string>
-    <string name="fb_login_protocol_scheme">fb398155150962685</string>
+    <string name="facebook_app_id">324275128212591</string>
+    <string name="fb_login_protocol_scheme">fb324275128212591</string>
+
     <string name="temp"> الحرارة</string>
     <string name="humidity"> الرطوبة</string>
     <string name="wind"> سرعة الرياح</string>
